@@ -1,0 +1,2 @@
+class ProcessDetail < ApplicationRecord
+end

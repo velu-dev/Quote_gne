@@ -1,0 +1,3 @@
+class UomDetail < ApplicationRecord
+	
+end
