@@ -12,25 +12,10 @@ class QuoteDetailsController < ApplicationController
       data = QuoteDetail.invoice_process(params)
       render json: data
     end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    def search 
+      data = QuoteDetail.search(params[:search])
+      render json: data
+    end
 
   # GET /quote_details
   def index
@@ -45,9 +30,14 @@ class QuoteDetailsController < ApplicationController
   end
 
   # POST /quote_details
+  
   def create
-    @quote_detail = QuoteDetail.new(quote_detail_params)
-
+    byebug
+    quoteno ="QNO"+(QuoteDetail.last.id + 1).to_s
+    status = false
+    #(quote_no: nil, cost: nil, discount: nil, total_cost: nil, status: nil, user_id: nil, currency_type_id: nil, project_detail_id: nil, project_type_id: nil)
+    @quote_detail = QuoteDetail.create(quote_no: quoteno,cost: params[:cost],discount: params[:discount],total_cost: params[:total_cost],status: status,user_id: params[:user_id].to_i, currency_type_id: params[:currency_type_id].to_i, project_type_id: params[:project_type_id].to_i,project_detail_id: params[:project_detail_id].to_i)
+byebug
     if @quote_detail.save
       render json: @quote_detail, status: :created, location: @quote_detail
     else

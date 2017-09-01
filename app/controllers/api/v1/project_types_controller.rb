@@ -3,6 +3,15 @@ module Api
 class ProjectTypesController < ApplicationController
   before_action :set_project_type, only: [:show, :update, :destroy]
 
+
+
+
+
+
+  def project_type
+    data = ProjectType.all.order(:id)
+    render json: data
+  end
   # GET /project_types
   def index
     @project_types = ProjectType.all
@@ -12,6 +21,7 @@ class ProjectTypesController < ApplicationController
 
   # GET /project_types/1
   def show
+
     render json: @project_type
   end
 

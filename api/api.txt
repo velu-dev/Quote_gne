@@ -1,0 +1,6 @@
+Project  Type: Get: 192.168.1.74:3005/api/v1/project_types/project_type
+Client Detail: Get: 192.168.1.74:3005/api/v1/users/client
+Invoice Page: Get: 192.168.1.74:3005/api/v1/quote_details/invoice_page
+Log in: Get :http://192.168.1.74:3005/api/v1/users/login?username=velusamyvnp@gmail.com&&password=velu
+New Quote: POST : 192.168.1.74:3005/api/v1/quote_details
+NEw Client: POST: 192.168.1.74:3005/api/v1/users/signup

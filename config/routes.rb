@@ -12,13 +12,14 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: 'json'} do
       namespace :v1 do
           get 'users/login'
-          get 'users/login1'
+          get 'users/user_type'
           get 'users/update_password'
-          
-        resources :users
-        resources :service_details
+          get 'users/client'
+          post 'users/signup'
           get 'quote_details/dashboard'
           get 'quote_details/invoice_page'
+          get 'quote_details/search'
+          get 'project_types/project_type'
         resources :quote_details
         resources :process_details
         resources :project_details
@@ -27,6 +28,8 @@ Rails.application.routes.draw do
         resources :project_types
         resources :user_roles
         resources :user_types
+        resources :users
+        resources :service_details
       end
     end
 
