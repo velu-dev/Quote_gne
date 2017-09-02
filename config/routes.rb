@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :user_types
   namespace :api, defaults: {format: 'json'} do
       namespace :v1 do
-          get 'users/login'
+          post 'users/login'
           get 'users/user_type'
           get 'users/update_password'
           get 'users/client'

@@ -3,6 +3,7 @@ class User < ApplicationRecord
 	belongs_to :user_type
 	belongs_to :user_role
 	has_many :project_details
+      has_many :quote_deatils
 
 
 	def self.authenticate(params)
