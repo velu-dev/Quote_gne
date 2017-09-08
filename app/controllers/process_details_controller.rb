@@ -7,7 +7,7 @@ class ProcessDetailsController < ApplicationController
 
     render json: @process_details
   end
-
+  
   # GET /process_details/1
   def show
     render json: @process_detail

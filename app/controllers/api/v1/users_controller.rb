@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    @users = User.all
+    @users = User.where(status: true)
 
     render json: @users
   end
@@ -13,15 +13,15 @@ class UsersController < ApplicationController
 
   def login
     user = User.authenticate(params)
-    render json: user
+     render json: user
   end
 
-  def update_password
+  def update_password 
     user = User.updatepass(params)
     render json: user
   end
   def signup
-    user = User.create!(name: params[:name],email_id: params[:email_id],address: params[:address],mobile_no: params[:mobile_no],username: params[:username],password: params[:password],user_type_id: params[:user_type_id],user_role_id: params[:user_role_id])
+    user = User.create!(name: params[:name],email_id: params[:email_id],address: params[:address],mobile_no: params[:mobile_no],username: params[:username],password: params[:password],company_name:params[:company_name],business_details:params[:business_details],user_type_id: params[:user_type_id],user_role_id: params[:user_role_id],status: true)
   end
   def user_type
     user_type = UserType.all
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
   end
 
   def client
-     data = params[:type].present? ? User.all.order(:id).where(user_type: params[:type]) : User.all.order(:id)
+     data = params[:type].present? ? User.where(status: true).order(:id).where(user_type: params[:type]) : User.where(status: true).order(:id)
      render json: data
   end
   # GET /users/1
@@ -55,7 +55,8 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
-    if @user.update(user_params)
+    #@user = User.find(params[:id])
+    if @user.update(user_params)#name: params[:name], email_id: params[:email_id], address: params[:address],mobile_no: params[:mobile_no],company_name: params[:company_name],business_details: params[:business_details])
       render json: @user
     else
       render json: @user.errors, status: :unprocessable_entity
@@ -64,7 +65,12 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   def destroy
-    @user.destroy
+    @user = User.find(params[:id])
+    if @user.update(status: false)
+      return true
+    else
+      return false
+    end
   end
 
   private
@@ -75,7 +81,7 @@ class UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:name, :email_id, :address, :mobile_no, :username, :password, :belongs_to, :belongs_to)
+      params.require(:user).permit(:name, :email_id, :address, :mobile_no, :username, :password, :user_type_id, :user_role_id,:company_name, :business_details)
     end
 end
 end

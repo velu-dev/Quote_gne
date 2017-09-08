@@ -10,6 +10,16 @@ class ProcessDetailsController < ApplicationController
     render json: @process_details
   end
 
+  def processdata
+    parant_process = params[:process_id].present? ? ProcessDetail.find(params[:process_id]) : ProcessDetail.where.not(parent_process_id: nil)
+    child_process = params[:process_id].present? ? ProcessDetail.where(parent_process_id: params[:process_id].to_i) : 0
+    data={
+      :parant_process => parant_process,
+      :child_process => child_process
+    }
+    render json: data
+  end
+
   # GET /process_details/1
   def show
     render json: @process_detail

@@ -9,7 +9,7 @@ class ProjectDetailsController < ApplicationController
 
     render json: @project_details
   end
-
+  
   # GET /project_details/1
   def show
     render json: @project_detail

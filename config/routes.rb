@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :user_types
   namespace :api, defaults: {format: 'json'} do
       namespace :v1 do
-          post 'users/login'
+          get 'users/login'
           get 'users/user_type'
           get 'users/update_password'
           get 'users/client'
@@ -20,6 +20,7 @@ Rails.application.routes.draw do
           get 'quote_details/invoice_page'
           get 'quote_details/search'
           get 'project_types/project_type'
+          get 'process_details/processdata'
         resources :quote_details
         resources :process_details
         resources :project_details

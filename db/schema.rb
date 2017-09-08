@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170831054356) do
+ActiveRecord::Schema.define(version: 20170907052645) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -118,6 +118,7 @@ ActiveRecord::Schema.define(version: 20170831054356) do
     t.datetime "updated_at", null: false
     t.string "company_name"
     t.string "business_details"
+    t.boolean "status"
     t.index ["user_role_id"], name: "index_users_on_user_role_id"
     t.index ["user_type_id"], name: "index_users_on_user_type_id"
   end

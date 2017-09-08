@@ -5,3 +5,7 @@ Log in: Get :http://192.168.1.74:3005/api/v1/users/login?username=velusamyvnp@gm
 New Quote: POST : 192.168.1.74:3005/api/v1/quote_details
 NEw Client: POST: 192.168.1.74:3005/api/v1/users/signup
 Currency Detail: Get : 192.168.1.74:3005/api/v1/currency_types
+Process_detail: GET : 192.168.1.74:3005/api/v1/process_details/processdata?process_id=5 
+
+client update :  PATCH/PUT  192.168.1.74:3005/api/v1/users/1 
+Client Delete: 	DELETE 192.168.1.74:3005/api/v1/users/1
