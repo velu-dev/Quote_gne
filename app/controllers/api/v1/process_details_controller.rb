@@ -27,6 +27,25 @@ class ProcessDetailsController < ApplicationController
 
   # POST /process_details
   def create
+    # id = params[:id].present? ? params[:id] : nil
+    # unless params[:parent_process_id].present? 
+    #   project_detail_id=[]
+    #   project_detail_id = ProcessDetail.find(id).project_detail
+    #   project_detail_id << id.to_i
+    #   @process_detail= ProcessDetail.find(id).update!(project_detail: project_detail_id)
+    #   render json: @project_detail
+    # else
+    #   byebug
+    #   a=[]
+    #   a<< params[:project_detail]
+    #   @process_detail = ProcessDetail.new(process_detail_params)
+    #    @process_detail.project_detail = a
+    #   if @process_detail.save
+    #     render json: @process_detail, status: :created, location: @process_detail
+    #   else
+    #     render json: @process_detail.errors, status: :unprocessable_entity
+    #   end
+    # end
     @process_detail = ProcessDetail.new(process_detail_params)
 
     if @process_detail.save
@@ -38,6 +57,7 @@ class ProcessDetailsController < ApplicationController
 
   # PATCH/PUT /process_details/1
   def update
+
     if @process_detail.update(process_detail_params)
       render json: @process_detail
     else
@@ -55,10 +75,10 @@ class ProcessDetailsController < ApplicationController
     def set_process_detail
       @process_detail = ProcessDetail.find(params[:id])
     end
-
+ 
     # Only allow a trusted parameter "white list" through.
     def process_detail_params
-      params.require(:process_detail).permit(:process_name, :parent_process_id, :cost, :belongs_to, :belongs_to, :belongs_to)
+      params.require(:process_detail).permit(:process_name, :parent_process_id, :cost, :currency_type_id, :uom_detail_id)#, :project_detail
     end
 end
 end

@@ -19,7 +19,7 @@ class QuoteDetailsController < ApplicationController
 
   # GET /quote_details
   def index
-    @quote_details = QuoteDetail.all
+    @quote_details = QuoteDetail.all.includes(:project_detail,:project_type,:user)
 
     render json: @quote_details
   end
@@ -32,12 +32,9 @@ class QuoteDetailsController < ApplicationController
   # POST /quote_details
   
   def create
-    byebug
     quoteno ="QNO"+(QuoteDetail.last.id + 1).to_s
-    status = false
     #(quote_no: nil, cost: nil, discount: nil, total_cost: nil, status: nil, user_id: nil, currency_type_id: nil, project_detail_id: nil, project_type_id: nil)
-    @quote_detail = QuoteDetail.create(quote_no: quoteno,cost: params[:cost],discount: params[:discount],total_cost: params[:total_cost],status: status,user_id: params[:user_id].to_i, currency_type_id: params[:currency_type_id].to_i, project_type_id: params[:project_type_id].to_i,project_detail_id: params[:project_detail_id].to_i)
-byebug
+    @quote_detail = QuoteDetail.create!(quote_no: quoteno,cost: params[:cost],discount: params[:discount],total_cost: params[:total_cost],status: false,user_id: params[:user_id].to_i, currency_type_id: params[:currency_type_id].to_i, project_type_id: params[:project_type_id].to_i,project_detail_id: params[:project_detail_id].to_i)
     if @quote_detail.save
       render json: @quote_detail, status: :created, location: @quote_detail
     else
@@ -67,7 +64,7 @@ byebug
 
     # Only allow a trusted parameter "white list" through.
     def quote_detail_params
-      params.require(:quote_detail).permit(:quote_no, :cost, :discount, :total_cost, :status, :belongs_to, :belongs_to, :belongs_to)
+      params.require(:quote_detail).permit(:quote_no, :cost, :discount, :total_cost, :status, :user_id, :currency_type_id, :project_detail_id)
     end
 end
 end

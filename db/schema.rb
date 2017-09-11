@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170907052645) do
+ActiveRecord::Schema.define(version: 20170911092759) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20170907052645) do
     t.bigint "uom_detail_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "status", default: false
     t.index ["currency_type_id"], name: "index_process_details_on_currency_type_id"
     t.index ["uom_detail_id"], name: "index_process_details_on_uom_detail_id"
   end
@@ -75,10 +76,11 @@ ActiveRecord::Schema.define(version: 20170907052645) do
   create_table "service_details", force: :cascade do |t|
     t.string "service_name"
     t.string "service_id"
-    t.bigint "project_detail_id"
+    t.bigint "process_detail_id"
+    t.integer "project_detail", array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["project_detail_id"], name: "index_service_details_on_project_detail_id"
+    t.index ["process_detail_id"], name: "index_service_details_on_process_detail_id"
   end
 
   create_table "uom_details", force: :cascade do |t|
@@ -131,7 +133,7 @@ ActiveRecord::Schema.define(version: 20170907052645) do
   add_foreign_key "quote_details", "project_details"
   add_foreign_key "quote_details", "project_types"
   add_foreign_key "quote_details", "users"
-  add_foreign_key "service_details", "project_details"
+  add_foreign_key "service_details", "process_details"
   add_foreign_key "uom_details", "currency_types"
   add_foreign_key "users", "user_roles"
   add_foreign_key "users", "user_types"

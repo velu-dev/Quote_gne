@@ -48,7 +48,7 @@ class ServiceDetailsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def service_detail_params
-      params.require(:service_detail).permit(:service_name, :service_id, :belongs_to)
+      params.require(:service_detail).permit(:service_name, :service_id, :project_detail_id,:process_detail_id)
     end
 end
 end

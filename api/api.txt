@@ -3,9 +3,12 @@ Client Detail: Get: 192.168.1.74:3005/api/v1/users/client
 Invoice Page: Get: 192.168.1.74:3005/api/v1/quote_details/invoice_page
 Log in: Get :http://192.168.1.74:3005/api/v1/users/login?username=velusamyvnp@gmail.com&&password=velu
 New Quote: POST : 192.168.1.74:3005/api/v1/quote_details
-NEw Client: POST: 192.168.1.74:3005/api/v1/users/signup
+New Client: POST: 192.168.1.74:3005/api/v1/users/signup
 Currency Detail: Get : 192.168.1.74:3005/api/v1/currency_types
 Process_detail: GET : 192.168.1.74:3005/api/v1/process_details/processdata?process_id=5 
 
 client update :  PATCH/PUT  192.168.1.74:3005/api/v1/users/1 
 Client Delete: 	DELETE 192.168.1.74:3005/api/v1/users/1
+
+
+Process Create : POST  192.168.1.74:3005/api/v1/process_details {"process_name" : "hi","parent_process_id" : "1","cost" : "12212","project_detail" : "1","currency_type_id" : "1","uom_detail_id" : "1"}

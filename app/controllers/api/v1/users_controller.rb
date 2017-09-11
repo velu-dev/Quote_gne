@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    @users = User.where(status: true)
+     @users = User.where(status: true).includes(:user_type).includes(:user_role)
 
     render json: @users
   end
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
   end
 
   def client
-     data = params[:type].present? ? User.where(status: true).order(:id).where(user_type: params[:type]) : User.where(status: true).order(:id)
+     data = params[:type].present? ? User.where(status: true).order(:id).where(user_type: params[:type]).includes(:user_type,:user_role) :  User.where(status: true).order(:id).includes(:user_type,:user_role)
      render json: data
   end
   # GET /users/1

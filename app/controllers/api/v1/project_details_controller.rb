@@ -5,8 +5,7 @@ class ProjectDetailsController < ApplicationController
 
   # GET /project_details
   def index
-    @project_details = ProjectDetail.all
-
+    @project_details = ProjectDetail.all.includes(:user=> [:user_type,:user_role])
     render json: @project_details
   end
   
@@ -18,9 +17,9 @@ class ProjectDetailsController < ApplicationController
   # POST /project_details
   def create
     @project_detail = ProjectDetail.new(project_detail_params)
-
+    @project_detail.status = false
     if @project_detail.save
-      render json: @project_detail, status: :created, location: @project_detail
+      render json: @project_detail
     else
       render json: @project_detail.errors, status: :unprocessable_entity
     end
@@ -48,7 +47,7 @@ class ProjectDetailsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def project_detail_params
-      params.require(:project_detail).permit(:project_name, :description, :status, :belongs_to, :belongs_to)
+      params.require(:project_detail).permit(:project_name, :description, :status, :user_id, :project_type_id)
     end
 end
 end
