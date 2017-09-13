@@ -5,7 +5,7 @@ class ProjectDetailsController < ApplicationController
 
   # GET /project_details
   def index
-    @project_details = ProjectDetail.all.includes(:user=> [:user_type,:user_role])
+    @project_details = ProjectDetail.where(status: true).includes(:project_type,:user=> [:user_type,:user_role])
     render json: @project_details
   end
   
@@ -36,7 +36,7 @@ class ProjectDetailsController < ApplicationController
 
   # DELETE /project_details/1
   def destroy
-    @project_detail.destroy
+    @project_detail.update(status: false)
   end
 
   private

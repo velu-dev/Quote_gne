@@ -10,15 +10,32 @@ class ServiceDetailsController < ApplicationController
     render json: @service_details
   end
 
+  def service_detail
+    data = []
+    params[:id].split(",").map do|sid|
+      service = ServiceDetail.find(sid.to_i)
+      process = service.process_detail
+      sub_process = ProcessDetail.where(parent_process_id: process.id)
+      data << {
+        :service_detail=> service,
+        :process => process,
+        :sub_process => sub_process
+      }
+    end
+      render json: data.flatten
+  end
+
   # GET /service_details/1
   def show
     render json: @service_detail
   end
 
   # POST /service_details
-  def create
-    @service_detail = ServiceDetail.new(service_detail_params)
 
+  def create
+    servideid ="SD" + (ServiceDetail.last.id + 1).to_s
+    @service_detail = ServiceDetail.new(service_detail_params)
+    @service_detail.servide_id = servideid
     if @service_detail.save
       render json: @service_detail, status: :created, location: @service_detail
     else

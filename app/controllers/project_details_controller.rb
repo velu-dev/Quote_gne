@@ -15,6 +15,7 @@ class ProjectDetailsController < ApplicationController
 
   # POST /project_details
   def create
+    byebug
     @project_detail = ProjectDetail.new(project_detail_params)
 
     if @project_detail.save
@@ -46,6 +47,6 @@ class ProjectDetailsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def project_detail_params
-      params.require(:project_detail).permit(:project_name, :description, :status, :belongs_to, :belongs_to)
+      params.require(:project_detail).permit(:project_name, :description, :status, :user_id, :project_type_id)
     end
 end

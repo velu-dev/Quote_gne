@@ -3,6 +3,7 @@ class QuoteDetailsController < ApplicationController
 
   # GET /quote_details
   def index
+    byebug
     @quote_details = QuoteDetail.all
 
     render json: @quote_details
@@ -16,7 +17,6 @@ class QuoteDetailsController < ApplicationController
   # POST /quote_details
   def create
     @quote_detail = QuoteDetail.new(quote_detail_params)
-
     if @quote_detail.save
       render json: @quote_detail, status: :created, location: @quote_detail
     else
@@ -46,6 +46,6 @@ class QuoteDetailsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def quote_detail_params
-      params.require(:quote_detail).permit(:quote_no, :cost, :discount, :total_cost, :status, :belongs_to, :belongs_to, :belongs_to)
+      params.require(:quote_detail).permit(:quote_no, :cost, :discount, :total_cost, :status, :project_detail_id, :user_id, :currency_type_id)
     end
 end

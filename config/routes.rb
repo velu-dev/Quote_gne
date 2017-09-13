@@ -21,6 +21,8 @@ Rails.application.routes.draw do
           get 'quote_details/search'
           get 'project_types/project_type'
           get 'process_details/processdata'
+          get 'service_details/service_detail'
+
         resources :quote_details
         resources :process_details
         resources :project_details

@@ -5,7 +5,7 @@ class UomDetailsController < ApplicationController
 
   # GET /uom_details
   def index
-    @uom_details = UomDetail.all
+    @uom_details = UomDetail.where(status: true).order(:id)
 
     render json: @uom_details
   end
@@ -18,7 +18,7 @@ class UomDetailsController < ApplicationController
   # POST /uom_details
   def create
     @uom_detail = UomDetail.new(uom_detail_params)
-
+    @uom_detail.status=true
     if @uom_detail.save
       render json: @uom_detail, status: :created, location: @uom_detail
     else
@@ -37,7 +37,7 @@ class UomDetailsController < ApplicationController
 
   # DELETE /uom_details/1
   def destroy
-    @uom_detail.destroy
+    @uom_detail.update(status: false)
   end
 
   private
